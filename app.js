@@ -4,9 +4,12 @@ const account = {
   income: [],
   addExpenses() {
     let expenseType = prompt("What was your expense? (rent/gas/food etc)");
-    account.expenses.push(expenseType);
     let expense = parseFloat(prompt("Add your expense: "));
-    account.expenses.push({ expenseType: expense });
+    let obj = {
+      expenseType: expenseType,
+      expense: expense,
+    };
+    account.expenses.push(obj);
     menu();
   },
   addIncome() {
@@ -16,7 +19,10 @@ const account = {
   },
   listAllExpenses() {
     account.expenses.forEach((item, i) => {
-      alert(`Expense nr:` + `${i + 1}: ${item} - Amount ${item}\n`);
+      alert(
+        `Expense nr:` +
+          `${i + 1}: ${item.expenseType} - Amount ${item.expense}\n`
+      );
     });
 
     menu();
