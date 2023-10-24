@@ -4,9 +4,12 @@ const account = {
   income: [],
   addExpenses() {
     let expenseType = prompt("What was your expense? (rent/gas/food etc)");
-    account.expenses.push(expenseType);
+    obj[expenseType] = account.expenses.label;
+    // account.expenses.push(expenseType);
     let expense = parseFloat(prompt("Add your expense: "));
-    account.expenses.push(expense);
+    obj[expense] = account.expenses.value;
+    account.expenses.push(obj);
+    // account.expenses.push({ expenseType: expense });
     menu();
   },
   addIncome() {
@@ -15,42 +18,47 @@ const account = {
     menu();
   },
   listAllExpenses() {
-    account.expenses.forEach((value, i) => {
-      alert(`Expense nr${i} ${value} - Amount ${account.expenses}`);
+    account.expenses.forEach((item, i) => {
+      console.log(
+        `Expense nr:` +
+          `${i + 1}: ${item[0].expenseType} - Amount ${item[0].expense}\n`
+      );
+      // console.log(element);
+      // alert(`Expense nr:` + `${i + 1}: ${element} - Amount ${element}\n`);
     });
+
     menu();
   },
   getSummary() {
-    alert();
+    let total = account.income - account.expenses;
+    alert(total);
   },
 };
 
-console.log(account.expenses);
+const menu = () => {
+  const choice = parseFloat(
+    prompt(
+      `EXPENSE TRACKER\n Select a choice ${1}. Add income ${2}. add expense ${3}. List all expenses ${4}. Get summary`
+    )
+  );
 
-// const menu = () => {
-//   const choice = parseFloat(
-//     prompt(
-//       `EXPENSE TRACKER\n Select a choice ${1}. Add income ${2}. add expense ${3}. List all expenses ${4}. Get summary`
-//     )
-//   );
+  switch (choice) {
+    case 1:
+      account.addIncome();
+      break;
+    case 2:
+      account.addExpenses();
+      break;
+    case 3:
+      account.listAllExpenses();
+      break;
+    case 4:
+      account.getSummary();
+      break;
+    // default:
+    //   alert("Please choice from the menu");
+    //   menu();
+  }
+};
 
-//   switch (choice) {
-//     case 1:
-//       account.addIncome();
-//       break;
-//     case 2:
-//       account.addExpenses();
-//       break;
-//     case 3:
-//       account.listAllExpenses();
-//       break;
-//     case 4:
-//       account.getSummary();
-//       break;
-//     default:
-//       alert("Please choice from the menu");
-//       menu();
-//   }
-// };
-
-// menu();
+menu();
