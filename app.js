@@ -12,7 +12,6 @@ const account = {
       expense: expense,
     };
     account.expenses.push(costs);
-    console.log(account.expenses);
 
     menu();
   },
