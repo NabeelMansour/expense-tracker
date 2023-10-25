@@ -35,7 +35,7 @@ const account = {
     for (let i of account.expenses) {
       totalExpense += i.expense;
     }
-    alert(`${account.name}, your summary is: ${account.income - totalExpense}`);
+    swal(`${account.name}, your summary is: ${account.income - totalExpense}`);
   },
 };
 
@@ -64,7 +64,7 @@ const menu = () => {
       account.getSummary();
       break;
     default:
-      alert("Please choice from the menu");
+      swal("Please choice from the menu");
       menu();
   }
 };
