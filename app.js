@@ -1,3 +1,5 @@
+// declaring the object with username and different methods for the user choices
+
 const account = {
   name: "Nabeel",
   expenses: [],
@@ -5,11 +7,13 @@ const account = {
   addExpenses() {
     let expenseType = prompt("What was your expense? (rent/gas/food etc)");
     let expense = parseFloat(prompt("Add your expense: "));
-    let obj = {
+    let costs = {
       expenseType: expenseType,
       expense: expense,
     };
-    account.expenses.push(obj);
+    account.expenses.push(costs);
+    console.log(account.expenses);
+
     menu();
   },
   addIncome() {
@@ -28,17 +32,24 @@ const account = {
     menu();
   },
   getSummary() {
-    let total = account.income - account.expenses;
-    alert(total);
+    let totalExpense = 0;
+    for (let i of account.expenses) {
+      totalExpense += i.expense;
+    }
+    alert(`${account.name}, your summary is: ${account.income - totalExpense}`);
   },
 };
+
+// Declared the menu function that takes user input
 
 const menu = () => {
   const choice = parseFloat(
     prompt(
-      `EXPENSE TRACKER\n Select a choice ${1}. Add income ${2}. add expense ${3}. List all expenses ${4}. Get summary`
+      `Please select a choice :\n 1. Add income\n 2. Add expense\n 3. List all expenses\n 4. Get summary`
     )
   );
+
+  // Swith statement that takes the user input and calls the method of choice
 
   switch (choice) {
     case 1:
@@ -53,9 +64,9 @@ const menu = () => {
     case 4:
       account.getSummary();
       break;
-    // default:
-    //   alert("Please choice from the menu");
-    //   menu();
+    default:
+      alert("Please choice from the menu");
+      menu();
   }
 };
 
